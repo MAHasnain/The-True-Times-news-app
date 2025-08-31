@@ -1,15 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./CSS/appStyle.css">
     <title>The True Times | Home</title>
 </head>
+
 <body>
+    <header class="container ">
+        <nav >
+            <div class="top">
+                <div class="search-bar">
+                    <form action="">
+                        <input type="search" placeholder="search" name="" required id="search-bar">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+                <div class="country-headline">
+                    <ul class="country-codes">
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
+                        <li><a href=""></a></li>
+                    </ul>
+                </div>
+                <div class="btns">
+                    <button><a href="">Subscribe for $1 per week</a></button>
+                    <button><a href="./HTML/login.html">Login</a></button>
+                </div>
+            </div>
+            <div class="middle">
+                <div class="current-date">
+                    <p id="date"></p>
+                    <p id="time"></p>
+                </div>
+                <div class="logo">
+                    <img src="./assets/images/T-logo-01.png" width="400px" alt="" srcset="">
+                </div>
+                <div class="stock-news">
+                    <p>
+                        S&P 500 -0.64%
+                    </p>
+                </div>
+            </div>
+            <div class="bottom">
+                <div>
+                    <ul class="nav-links">
+                        <li><a href="./HTML/Categories/general.html">General</a>
+                        </li>
+                        <li><a href="./HTML/Categories/business.html">Business</a>
+                        </li>
+                        <li><a href="./HTML/Categories/entertainment.html">Entertainment</a>
+                        </li>
+                        <li><a href="./HTML/Categories/health.html">Health</a>
+                        </li>
+                        <li><a href="./HTML/Categories/science.html">Science</a>
+                        </li>
+                        <li><a href="./HTML/Categories/sports.html">Sports</a>
+                        </li>
+                        <li><a href="./HTML/Categories/technology.html">Technology</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <hr>
+    </header>
+
     
-    <h1>The True Times</h1>
 
+    <script src="https://kit.fontawesome.com/6c4078df96.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js"
+        integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./JS/app.js"></script>
-
 </body>
+
 </html>
