@@ -12,17 +12,27 @@ const standardEndpoint = "https://newsapi.org/v2";
 `${standardEndpoint}/top-headlines?q=trump&apiKey=${API_KEY}`;
 `${standardEndpoint}/top-headlines/sources?category=businessapiKey=${API_KEY}`; /// CATEGORIES => business  entertainment  general  health  science  sports  technology
 
-
+// header 
+// moment().format('MMMM Do YYYY, h:mm:ss a'); // August 31st 2025, 4:47:41 pm
+// moment().format('dddd');
+let date = document.getElementById("date");
+let time = document.getElementById("time");
+function timeUpdate() {
+    let currentDate = moment().format('dddd, MMMM Do YYYY');
+    let currentTime = moment().format('h:mm:ss a');
+    date.textContent = String(currentDate);
+    time.textContent = String(currentTime);
+    setTimeout(timeUpdate, 1000);
+}
+timeUpdate()
+console.log(date);
 
 document.addEventListener("DOMContentLoaded", async () => {
-
     try {
         const res = await fetch(`${standardEndpoint}/top-headlines?country=us&apiKey=${API_KEY}`)
         const data = await res.json()
 
         console.log(data);
-
-        console.log(data.articles[5].content);
 
     } catch (error) {
         console.error(error);
