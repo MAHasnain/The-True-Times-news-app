@@ -26,23 +26,59 @@ function timeUpdate() {
 }
 timeUpdate()
 
-const news_card = document.querySelector(".news-card")
+const main = document.querySelector(".main")
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         // const res = await fetch(`${standardEndpoint}/top-headlines?country=pk&apiKey=${API_KEY}`)
-        const res = await fetch(`${standardEndpoint}/top-headlines?country=us&category=science&apiKey=${API_KEY}`)
+        const res = await fetch(`${standardEndpoint}/top-headlines?country=us&category=general&apiKey=${API_KEY}`)
         const data = await res.json()
 
-        // console.log(data.articles);
+        function cleanContent(content) {
+            if (!content) return "";
+            return content.split("[+")[0].trim();
+        }
+
+        data.articles.map(article => {
+            // console.log(article);
+            main.innerHTML += `
+                <div class="news-card ">
+                <div class="txt-content text_60_wd">
+                        <h3 class="title">${article.title}</h3>
+                        <p class="text">${cleanContent(article.content)}</p>
+                        <a href="${article.url}">
+                Read more...</a>
+                    </div>
+                    <div class="img"><img width="300px" src="${article.urlToImage}" alt="" srcset=""></div>
+                    </div>`})
+    } catch (error) {
+        console.error(error);
+    }
+})
+
+const allHeadlines = document.querySelector(".all-headlines")
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        // const res = await fetch(`${standardEndpoint}/top-headlines?country=pk&apiKey=${API_KEY}`)
+
+        const res = await fetch(`${standardEndpoint}/everything?q=finance&from=${moment().subtract(3, 'days').calendar()}&to=${moment().format('L')}&sortBy=popularity&pageSize=12&apiKey=${API_KEY}`)
+        const data = await res.json()
+        console.log(data);
+        function cleanContent(content) {
+            if (!content) return "";
+            return content.split("[+")[0].trim();
+        }
+
         data.articles.map(article => {
             console.log(article);
-            news_card.innerHTML = `
-           <div class="txt-content">
-                        <h3 class="title">${article.title}</h3>
-                        <p class="text">${article.content}</p>
-                    </div>
-                    <div class="img"></div>`})
-
+            allHeadlines.innerHTML += `
+             <div class="headline">
+                    <img src="${article.urlToImage}" width="300px" alt="">
+                    <div class="txt-content txt_fixed_wd">
+                        <h4 class="title">${article.title}</h4>
+                        <p class="text">${cleanContent(article.content)}</p>
+                        <a href="${article.url}">
+                Read more...</a>
+                    </div>`})
     } catch (error) {
         console.error(error);
     }
