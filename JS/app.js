@@ -55,6 +55,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 })
 
+function cleanContent(content) {
+    if (!content) return "";
+    return content.split("[+")[0].trim();
+}
+
 const allHeadlines = document.querySelector(".all-headlines")
 document.addEventListener("DOMContentLoaded", async () => {
     try {
@@ -62,14 +67,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const res = await fetch(`${standardEndpoint}/everything?q=finance&from=${moment().subtract(3, 'days').calendar()}&to=${moment().format('L')}&sortBy=popularity&pageSize=12&apiKey=${API_KEY}`)
         const data = await res.json()
-        console.log(data);
-        function cleanContent(content) {
-            if (!content) return "";
-            return content.split("[+")[0].trim();
-        }
+        // console.log(data);
 
         data.articles.map(article => {
-            console.log(article);
+            // console.log(article);
             allHeadlines.innerHTML += `
              <div class="headline">
                     <img src="${article.urlToImage}" width="300px" alt="">
@@ -83,4 +84,45 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error(error);
     }
 
+})
+
+const searchInput = document.querySelector("#search-bar");
+const searchBtn = document.querySelector("#search-btn");
+
+searchBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    try {
+
+        // GET https://newsapi.org/v2/everything?q=bitcoin&apiKey=75cf45673abd4cd8b24e93aba1200290
+        const response = await fetch(`${standardEndpoint}/everything?q=${searchInput.value.toLowerCase()}&pageSize=13&apiKey=${API_KEY}`)
+        const data = await response.json();
+        // console.log("Search query data ", data);
+
+        searchInput.value = "";
+        main.innerHTML = "";
+
+        function changeDateFormat(dateString) {
+            const dateObj = new Date(dateString);
+            const converted = dateObj.toISOString().slice(0, 10)
+            return converted;
+        }
+
+        data.articles.map(article => {
+            console.log(article);
+            main.innerHTML += `
+            <div class="headline">
+                    <img src="${article.urlToImage}" width="300px" alt="">
+                    <div class="txt-content txt_fixed_wd">
+                        <h4 class="title">${article.title}</h4>
+                        <p class="text">${cleanContent(article.content)}</p>
+                        <p>Published at : ${changeDateFormat(article.publishedAt)}</p>
+                        <a href="${article.url}">
+                Read more...</a>
+                </div>
+        `
+        })
+    } catch (error) {
+        console.error(error);
+    }
 })
