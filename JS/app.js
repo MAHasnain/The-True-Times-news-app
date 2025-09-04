@@ -99,7 +99,7 @@ searchBtn.addEventListener("click", async (e) => {
         const data = await response.json();
         // console.log("Search query data ", data);
 
-        searchInput.value = "";
+
         main.innerHTML = "";
 
         function changeDateFormat(dateString) {
@@ -110,8 +110,12 @@ searchBtn.addEventListener("click", async (e) => {
 
         data.articles.map(article => {
             console.log(article);
+            const mainHeading = document.createElement("h2");
+            mainHeading.innerText = `${searchInput.value} News`
+            main.appendChild(mainHeading);
+
             main.innerHTML += `
-            <div class="headline">
+            <div class="searched_articles">
                     <img src="${article.urlToImage}" width="300px" alt="">
                     <div class="txt-content txt_fixed_wd">
                         <h4 class="title">${article.title}</h4>
@@ -120,7 +124,8 @@ searchBtn.addEventListener("click", async (e) => {
                         <a href="${article.url}">
                 Read more...</a>
                 </div>
-        `
+        `;
+            searchInput.value = "";
         })
     } catch (error) {
         console.error(error);
