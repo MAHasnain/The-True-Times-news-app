@@ -110,9 +110,11 @@ searchBtn.addEventListener("click", async (e) => {
 
         data.articles.map(article => {
             console.log(article);
-            const mainHeading = document.createElement("h2");
-            mainHeading.innerText = `${searchInput.value} News`
-            main.appendChild(mainHeading);
+            if (searchInput.value !== '') {
+                const mainHeading = document.createElement("h2");
+                mainHeading.innerText = `${searchInput.value} News`
+                main.appendChild(mainHeading);
+            }
 
             main.innerHTML += `
             <div class="searched_articles">
