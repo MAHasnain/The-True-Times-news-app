@@ -69,7 +69,7 @@ nav_links.addEventListener("click", async (e) => {
 
     try {
         // const res = await fetch(`${standardEndpoint}/top-headlines?country=pk&apiKey=${API_KEY}`)
-        const res = await fetch(`${standardEndpoint}/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`)
+        const res = await fetch(`${standardEndpoint}/top-headlines?country=us&category=${category}&pageSize=15&apiKey=${API_KEY}`)
         const data = await res.json()
 
         main.innerHTML = "";
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         // const res = await fetch(`${standardEndpoint}/top-headlines?country=pk&apiKey=${API_KEY}`)
 
-        const res = await fetch(`${standardEndpoint}/everything?q=finance&from=${moment().subtract(3, 'days').calendar()}&to=${moment().format('L')}&sortBy=popularity&pageSize=12&apiKey=${API_KEY}`)
+        const res = await fetch(`${standardEndpoint}/everything?q=finance&from=${moment().subtract(3, 'days').calendar()}&to=${moment().format('L')}&sortBy=popularity&pageSize=8&apiKey=${API_KEY}`)
         const data = await res.json()
         // console.log(data);
 

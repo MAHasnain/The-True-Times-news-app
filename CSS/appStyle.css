@@ -193,3 +193,31 @@ section {
     padding: 5px;
     font-size: small;
 }
+
+.footer {
+    font-family: Helvetica, sans-serif;
+    padding: 10px;
+}
+
+.footer-nav-links {
+    padding: 20px 10px;
+}
+
+.footer-nav-links li {
+    list-style: none;
+}
+
+.navs {
+    margin: 5px;
+    cursor: pointer;
+}
+
+.sub-footer {
+    padding: 2px 20px 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub-footer a {
+    margin: 5px;
+}
