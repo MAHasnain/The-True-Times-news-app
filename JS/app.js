@@ -1,4 +1,4 @@
-const API_KEY = "75cf45673abd4cd8b24e93aba1200290";
+const API_KEY = "b7854a039c3740c598ca25da0c0db2bc";
 
 const query = "bitcoin"
 const standardEndpoint = "https://newsapi.org/v2";
@@ -25,31 +25,75 @@ function timeUpdate() {
     setTimeout(timeUpdate, 1000);
 }
 timeUpdate()
+const nav_links = document.querySelector(".nav-links")
 
-const main = document.querySelector(".main")
+const main_business = document.querySelector(".main_business");
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        // const res = await fetch(`${standardEndpoint}/top-headlines?country=pk&apiKey=${API_KEY}`)
-        const res = await fetch(`${standardEndpoint}/top-headlines?country=us&category=general&apiKey=${API_KEY}`)
-        const data = await res.json()
 
-        function cleanContent(content) {
-            if (!content) return "";
-            return content.split("[+")[0].trim();
-        }
+        const response = await fetch(`${standardEndpoint}/top-headlines?country=us&category=general&pageSize=12&apiKey=${API_KEY}`)
+        const data = await response.json();
+        // console.log(data);
+
+        main.innerHTML = "";
+
+        const mainHeading = document.createElement("h2");
+        mainHeading.style.textTransform = "capitalize"
+        mainHeading.innerText = `General News`
+        main.appendChild(mainHeading);
 
         data.articles.map(article => {
             // console.log(article);
-            main.innerHTML += `
-                <div class="news-card ">
+            const news_card = document.createElement("div")
+            news_card.classList.add("news-card")
+
+            news_card.innerHTML += `
                 <div class="txt-content text_60_wd">
                         <h3 class="title">${article.title}</h3>
                         <p class="text">${cleanContent(article.content)}</p>
                         <a href="${article.url}">
                 Read more...</a>
                     </div>
-                    <div class="img"><img width="300px" src="${article.urlToImage}" alt="" srcset=""></div>
-                    </div>`})
+                    <div class="img"><img width="300px" src="${article.urlToImage}" alt="" srcset=""></div>`;
+            main.appendChild(news_card)
+        })
+
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+const main = document.querySelector(".main")
+nav_links.addEventListener("click", async (e) => {
+    const category = e.target.dataset.category
+
+    try {
+        // const res = await fetch(`${standardEndpoint}/top-headlines?country=pk&apiKey=${API_KEY}`)
+        const res = await fetch(`${standardEndpoint}/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`)
+        const data = await res.json()
+
+        main.innerHTML = "";
+
+        const mainHeading = document.createElement("h2");
+        mainHeading.style.textTransform = "capitalize"
+        mainHeading.innerText = `${category} News`
+        main.appendChild(mainHeading);
+
+        data.articles.map(article => {
+            // console.log(article);
+            const news_card = document.createElement("div")
+            news_card.classList.add("news-card")
+
+            news_card.innerHTML += `
+                <div class="txt-content text_60_wd">
+                        <h3 class="title">${article.title}</h3>
+                        <p class="text">${cleanContent(article.content)}</p>
+                        <a href="${article.url}">
+                Read more...</a>
+                    </div>
+                    <div class="img"><img width="300px" src="${article.urlToImage}" alt="" srcset=""></div>`;
+            main.appendChild(news_card)
+        })
     } catch (error) {
         console.error(error);
     }
@@ -83,7 +127,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
         console.error(error);
     }
-
 })
 
 const searchInput = document.querySelector("#search-bar");
@@ -112,6 +155,7 @@ searchBtn.addEventListener("click", async (e) => {
             console.log(article);
             if (searchInput.value !== '') {
                 const mainHeading = document.createElement("h2");
+                mainHeading.style.textTransform = "capitalize"
                 mainHeading.innerText = `${searchInput.value} News`
                 main.appendChild(mainHeading);
             }

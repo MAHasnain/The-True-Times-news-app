@@ -109,6 +109,7 @@ nav {
 
 .nav-links li {
     list-style: none;
+    cursor: pointer;
 }
 
 hr {
